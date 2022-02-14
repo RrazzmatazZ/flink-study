@@ -1,9 +1,7 @@
 package com.example.flink.core.sink;
 
-import com.example.flink.core.source.SensorReading;
-import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import com.example.flink.core.common.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.redis.RedisSink;
 import org.apache.flink.streaming.connectors.redis.common.config.FlinkJedisPoolConfig;

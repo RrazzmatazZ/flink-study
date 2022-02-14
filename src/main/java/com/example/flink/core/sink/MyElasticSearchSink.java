@@ -1,6 +1,6 @@
 package com.example.flink.core.sink;
 
-import com.example.flink.core.source.SensorReading;
+import com.example.flink.core.common.beans.SensorReading;
 import org.apache.flink.api.common.functions.RuntimeContext;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

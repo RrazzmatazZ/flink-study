@@ -1,6 +1,6 @@
 package com.example.flink.core.transform;
 
-import com.example.flink.core.source.SensorReading;
+import com.example.flink.core.common.beans.SensorReading;
 import com.example.flink.wordcount.WordCountStream;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;

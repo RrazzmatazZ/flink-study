@@ -1,7 +1,6 @@
 package com.example.flink.core.transform;
 
-import com.example.flink.core.source.SensorReading;
-import org.apache.flink.api.java.tuple.Tuple2;
+import com.example.flink.core.common.beans.SensorReading;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.datastream.ConnectedStreams;
 import org.apache.flink.streaming.api.datastream.DataStream;

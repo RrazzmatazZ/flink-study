@@ -1,11 +1,10 @@
 package com.example.flink.core.sink;
 
-import com.example.flink.core.source.SensorReading;
+import com.example.flink.core.common.beans.SensorReading;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-import org.apache.flink.streaming.connectors.redis.RedisSink;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

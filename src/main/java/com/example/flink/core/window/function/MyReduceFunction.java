@@ -1,6 +1,7 @@
 package com.example.flink.core.window.function;
 
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -27,7 +28,7 @@ public class MyReduceFunction {
                 })
                 .keyBy(0)
                 .window(TumblingProcessingTimeWindows.of(Time.seconds(10)))
-                .reduce(new org.apache.flink.api.common.functions.ReduceFunction<Tuple3<String, String, Integer>>() {
+                .reduce(new ReduceFunction<Tuple3<String, String, Integer>>() {
                     @Override
                     public Tuple3<String, String, Integer> reduce(Tuple3<String, String, Integer> value1, Tuple3<String, String, Integer> value2) throws Exception {
                         System.out.printf("r1.value:%s,r2.value:%s%n", value1.f2, value2.f2);

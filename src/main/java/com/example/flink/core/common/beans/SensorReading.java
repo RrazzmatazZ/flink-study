@@ -1,4 +1,4 @@
-package com.example.flink.core.source;
+package com.example.flink.core.common.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

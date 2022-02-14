@@ -1,6 +1,6 @@
 package com.example.flink.core.transform;
 
-import com.example.flink.core.source.SensorReading;
+import com.example.flink.core.common.beans.SensorReading;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
