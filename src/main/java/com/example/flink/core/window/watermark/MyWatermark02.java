@@ -1,9 +1,10 @@
 package com.example.flink.core.window.watermark;
 
+
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
@@ -13,17 +14,24 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 
 import java.text.SimpleDateFormat;
 
+
+/**
+ * 1.13版本以下的api，有Period和Punctuated设定的版本
+ */
 public class MyWatermark02 {
 
     public static void main(String[] args) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.getConfig().setAutoWatermarkInterval(1000);
 
-        DataStream<String> dataStream = env.socketTextStream("10.12.119.109", 4444)
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment();
+        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+
+        DataStream<String> dataStream = env.socketTextStream("192.168.150.121", 4444)
                 .assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks<String>() {
                     long currentTimeStamp = 0L;
-                    long maxDelayAllowed = 0L;
+                    //long maxDelayAllowed = 0L;
+                    long maxDelayAllowed = 5000L; //这里设置5s的延迟
+
                     long currentWaterMark;
 
                     @Override
@@ -59,8 +67,7 @@ public class MyWatermark02 {
 
                     @Override
                     public StringBuilder add(Tuple2<String, String> value, StringBuilder accumulator) {
-                        accumulator.append(value.f1);
-                        return accumulator;
+                        return accumulator.append("-").append(sdf.format(value.f1));
                     }
 
                     @Override
@@ -70,14 +77,11 @@ public class MyWatermark02 {
 
                     @Override
                     public StringBuilder merge(StringBuilder a, StringBuilder b) {
-                        a.append(b);
-                        return a;
+                        return a.append("-").append(b);
                     }
                 })
                 .print();
 
         env.execute("WaterMark Test Demo");
     }
-
-
 }
