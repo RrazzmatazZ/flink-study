@@ -13,15 +13,14 @@ public class MyInMemoryCatalog {
 
     public static void main(String[] args) {
         TableEnvironment tableEnv = TableEnvironment.create(EnvironmentSettings.newInstance().build());
-        String sql =
-                "create table FileSource(" +
-                        "name STRING," +
-                        "timestamps BIGINT," +
-                        "temp DOUBLE" +
-                        ") WITH(" +
-                        "'connector'='filesystem'," +
-                        "'path'='F:\\code\\github\\flink-study\\src\\main\\resources\\sensor.txt'," +
-                        "'format' ='csv')";
+        String sql = "CREATE TABLE blackhole_table (" +
+                "  f0 INT," +
+                "  f1 INT," +
+                "  f2 STRING," +
+                "  f3 DOUBLE" +
+                ") WITH (" +
+                "  'connector' = 'blackhole'" +
+                ")";
         tableEnv.executeSql(sql);
         String[] databases = tableEnv.listDatabases();
         //这里输出的是default_database
