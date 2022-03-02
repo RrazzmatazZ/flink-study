@@ -4,7 +4,7 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;
-import org.apache.flink.table.api.bridge.java.BatchTableEnvironment;
+//import org.apache.flink.table.api.bridge.java.BatchTableEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
@@ -24,8 +24,8 @@ public class MyTableEnvironment {
         //#endregion
 
         //#region 基于老版本planner的批处理
-        ExecutionEnvironment batchEnv = ExecutionEnvironment.getExecutionEnvironment();
-        BatchTableEnvironment oldBatchTableEnv = BatchTableEnvironment.create(batchEnv);
+//        ExecutionEnvironment batchEnv = ExecutionEnvironment.getExecutionEnvironment();
+//        BatchTableEnvironment oldBatchTableEnv = BatchTableEnvironment.create(batchEnv);
         //#endregion
 
         //#region 基于blink的流处理
