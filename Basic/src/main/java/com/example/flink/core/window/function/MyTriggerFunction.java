@@ -1,6 +1,5 @@
 package com.example.flink.core.window.function;
 
-import com.example.flink.core.common.beans.Person;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;

@@ -1,8 +1,6 @@
 package com.example.flink.core.window.function;
 
 import com.example.flink.core.common.beans.Grade;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -12,8 +10,6 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTime
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
-
-import java.util.Arrays;
 
 /**
  * processing window function(全窗口遍历执行)
