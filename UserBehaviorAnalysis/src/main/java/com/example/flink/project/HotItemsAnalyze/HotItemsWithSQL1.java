@@ -10,14 +10,13 @@ import org.apache.flink.streaming.api.functions.timestamps.AscendingTimestampExt
 import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.Slide;
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
 /**
  * 实时热门项目统计SQL实现
  */
-public class HotItemsWithSQL {
+public class HotItemsWithSQL1 {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -45,31 +44,22 @@ public class HotItemsWithSQL {
 
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, EnvironmentSettings.newInstance().build());
 
-        //将流转换为表
-        Table table = tableEnv.fromDataStream(map, "itemId,behavior,timestamp.rowtime as ts");
+        tableEnv.createTemporaryView("dataTable", map, "itemId,behavior,timestamp.rowtime as ts");
 
-
-        //分组开窗
-        Table windowAggTable = table
-                .filter("behavior ='pv'")
-                .window(Slide.over("1.hours").every("5.minutes").on("ts").as("w"))
-                .groupBy("itemId,w")
-                .select("itemId,w.end as windowEnd,itemId.count as cnt");
-
-        //利用开窗函数对count值进行排序，并获取rowNum,从而获取topN
-        //这里因为调用的是tableEnvironment而不是StreamTableEnvironment（可能获取field会出现问题）
-        DataStream<Row> aggStream = tableEnv.toAppendStream(windowAggTable, Row.class);
-        tableEnv.createTemporaryView("agg", aggStream, "itemId,windowEnd,cnt");
-
-        Table result = tableEnv.sqlQuery(
-                "select * from (" +
-                        "select *,ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num from agg" +
+        Table resultTable = tableEnv.sqlQuery(
+                "     select * from (" +
+                        "select *,ROW_NUMBER() over (partition by windowEnd order by cnt desc) as row_num from (" +
+                        "  select itemId,count(itemId) as cnt,HOP_END(ts,interval '5' minute,interval '1' hour) as windowEnd" +
+                        "  from dataTable" +
+                        "  where behavior='pv'" +
+                        "  group by itemId,HOP(ts,interval '5' minute,interval '1' hour)" +
+                        ")" +
                         ") where row_num<=5"
         );
 
-        DataStream<Tuple2<Boolean, Row>> resultStream = tableEnv.toRetractStream(result, Row.class);
-        resultStream.print();
-        env.execute("hot items sql");
+        DataStream<Tuple2<Boolean, Row>> outStream = tableEnv.toRetractStream(resultTable, Row.class);
+        outStream.print();
+        env.execute();
 
     }
 }
