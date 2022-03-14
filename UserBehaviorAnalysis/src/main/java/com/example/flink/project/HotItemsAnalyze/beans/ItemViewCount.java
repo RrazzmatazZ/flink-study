@@ -1,4 +1,4 @@
-package com.example.flink.project.beans;
+package com.example.flink.project.HotItemsAnalyze.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
