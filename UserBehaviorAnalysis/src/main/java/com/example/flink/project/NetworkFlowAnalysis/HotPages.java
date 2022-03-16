@@ -1,10 +1,8 @@
 package com.example.flink.project.NetworkFlowAnalysis;
 
 import com.example.flink.project.HotItemsAnalyze.HotItems;
-import com.example.flink.project.HotItemsAnalyze.beans.ItemViewCount;
-import com.example.flink.project.HotItemsAnalyze.beans.UserBehavior;
-import com.example.flink.project.NetworkFlowAnalysis.beans.ApacheLogEvent;
-import com.example.flink.project.NetworkFlowAnalysis.beans.PageViewCount;
+import com.example.flink.project.beans.ApacheLogEvent;
+import com.example.flink.project.beans.PageViewCount;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.FilterFunction;

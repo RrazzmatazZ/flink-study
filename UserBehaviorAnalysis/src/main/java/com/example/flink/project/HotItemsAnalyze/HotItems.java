@@ -1,7 +1,7 @@
 package com.example.flink.project.HotItemsAnalyze;
 
-import com.example.flink.project.HotItemsAnalyze.beans.ItemViewCount;
-import com.example.flink.project.HotItemsAnalyze.beans.UserBehavior;
+import com.example.flink.project.beans.ItemViewCount;
+import com.example.flink.project.beans.UserBehavior;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.FilterFunction;

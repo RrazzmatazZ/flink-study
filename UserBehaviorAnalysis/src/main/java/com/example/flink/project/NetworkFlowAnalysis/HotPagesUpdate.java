@@ -1,19 +1,13 @@
 package com.example.flink.project.NetworkFlowAnalysis;
 
-import com.example.flink.project.HotItemsAnalyze.HotItems;
-import com.example.flink.project.NetworkFlowAnalysis.beans.ApacheLogEvent;
-import com.example.flink.project.NetworkFlowAnalysis.beans.PageViewCount;
+import com.example.flink.project.beans.ApacheLogEvent;
+import com.example.flink.project.beans.PageViewCount;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.AggregateFunction;
-import org.apache.flink.api.common.functions.FilterFunction;
-import org.apache.flink.api.common.functions.MapFunction;
-import org.apache.flink.api.common.state.ListState;
-import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
@@ -28,9 +22,6 @@ import org.apache.flink.util.OutputTag;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;

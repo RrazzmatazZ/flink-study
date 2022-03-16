@@ -1,4 +1,4 @@
-package com.example.flink.project.NetworkFlowAnalysis.beans;
+package com.example.flink.project.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
