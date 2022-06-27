@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**
- *
+ * 热门页面更新版本
  */
 public class HotPagesUpdate {
 

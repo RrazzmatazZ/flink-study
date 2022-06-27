@@ -26,13 +26,18 @@ public class MyRedisSink {
                 new SensorReading("sensor_7", 1547718202L, 6.7),
                 new SensorReading("sensor_10", 1547718205L, 38.1)
         ));
-        source.addSink(new RedisSink<SensorReading>(config,new MyRedisMapper()));
+        source.addSink(new RedisSink<SensorReading>(config, new MyRedisMapper()));
         env.execute();
     }
 
 
     public static class MyRedisMapper implements RedisMapper<SensorReading> {
 
+        /**
+         * 声明命令描述
+         *
+         * @return
+         */
         @Override
         public RedisCommandDescription getCommandDescription() {
             return new RedisCommandDescription(RedisCommand.HSET, "sensor_temp");

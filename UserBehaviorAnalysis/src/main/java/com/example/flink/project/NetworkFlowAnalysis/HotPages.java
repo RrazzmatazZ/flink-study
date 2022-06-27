@@ -160,7 +160,7 @@ public class HotPages {
             Thread.sleep(1000L);
 
             // state.clear();这里不能clear，因为  state.add(value); 只是更新当前的输入值，但是state里包含的不止是这一个输入值的key对于的状态
-            //但是如果不clear的话，当有延迟数据进来的时候会出现同一个key输出多次的情况（因为注册了一个已经过时了的定时器，又由于是list类型的state，就相当于加了两次，所以要转为map state）
+            //但是如果不clear的话，当有延迟数据进来的时候会出现同一个key输出多次的情况（因为注册了一个已经过时了的定时器，又由于是list类型的state，就相当于加了两次，所以要转为map state）,具体实现HotPagesUpdate
         }
     }
 }
