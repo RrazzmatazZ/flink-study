@@ -25,6 +25,8 @@ public class CheckpointBackend {
         env.getCheckpointConfig().setMinPauseBetweenCheckpoints(100L);
         //允许的checkpoint保存失败次数
         env.getCheckpointConfig().setTolerableCheckpointFailureNumber(10);
+        //启动非对齐的分布式快照保存方式（结合背压），需要exactly once并且并行度为1
+        env.getCheckpointConfig().enableUnalignedCheckpoints();
 
 
         //#region 重启策略的配置
