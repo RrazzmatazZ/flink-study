@@ -126,5 +126,10 @@
             <version>${flink.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-cep-scala_2.12</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
     </dependencies>
 </project>
